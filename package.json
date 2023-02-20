@@ -1,0 +1,32 @@
+{
+  "name": "notifications-service-worker",
+  "version": "0.0.1",
+  "description": "Worker responsible for consuming, processing and sending notifications through different channels",
+  "author": {
+    "name": "Davi Cedraz",
+    "email": "davioler@gmail.com"
+  },
+  "engines": {
+    "npm": ">=8.0.0 <9.0.0",
+    "node": "19.2.0"
+  },
+  "scripts": {
+    "start": "npx ts-node app/index.ts",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davicedraz/notifications-service-worker.git"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "@vitest/coverage-istanbul": "^0.25.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "vitest": "^0.25.7"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
