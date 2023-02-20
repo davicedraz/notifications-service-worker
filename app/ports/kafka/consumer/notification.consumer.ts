@@ -1,4 +1,5 @@
-﻿import { NotificationRequest } from "../../adapters/notification-request";
+﻿import { KafkaMessage } from './../kafka-message';
+import { NotificationRequest } from "../../../adapters/notification-request";
 import { NotificationController } from "../../../controller/notification.controller";
 
 export class NotificationConsumer {
@@ -21,9 +22,19 @@ export class NotificationConsumer {
     }];
 
     newMessages.forEach(async message => {
-      const notification = NotificationRequest.fromKafka(message);
-      await this.notificationController.handle(notification);
+      const notificationRequest = this.createNotificationRequestfromKafkaMessage(message);
+      await this.notificationController.handle(notificationRequest);
     });
+  }
+
+  public createNotificationRequestfromKafkaMessage(message: KafkaMessage): NotificationRequest {
+    const title = message.data.title;
+    const userEmail = message.data.user_email;
+    const content = message.data.content;
+    const imageURL = message.data.image_url;
+    const channel = message.data.channel;
+
+    return new NotificationRequest(title, content, imageURL, channel, userEmail);
   }
 
 }

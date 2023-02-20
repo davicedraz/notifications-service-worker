@@ -1,5 +1,5 @@
 ﻿import { NotificationResponse } from '../../ports/adapters/notification-response';
 
-export interface RespondNotificationRequest {
+export interface NotificationRequestRespondent {
   execute(notificationResponse: NotificationResponse): Promise<NotificationResponse>
 }
