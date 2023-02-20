@@ -1,5 +1,5 @@
-﻿import { NotificationRequest } from '../../ports/adapters/notification-request';
+﻿import { NotificationRequest } from './../../adapters/notification-request';
 
 export interface NotificationValidator {
-  execute(notification: NotificationRequest): Promise<Boolean>
+  execute(notification: NotificationRequest): Boolean
 }

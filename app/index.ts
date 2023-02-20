@@ -1,17 +1,20 @@
 ﻿import { SendNotification } from "./actions/send/send-notification.action";
+import { ValidateNotificationRequest } from "./actions/validate/validate-notification-request.action";
 import { NotificationController } from "./controller/notification.controller";
 import { NotificationConsumer } from "./ports/kafka/consumer/notification.consumer";
 
 require('dotenv').config();
 
 class Application {
-  private readonly sendNotification: SendNotification;
+  private readonly notificationValidator: ValidateNotificationRequest;
+  private readonly notificationSender: SendNotification;
   private readonly notificationController: NotificationController;
   private readonly notificationConsumer: NotificationConsumer;
 
   constructor() {
-    this.sendNotification = new SendNotification();
-    this.notificationController = new NotificationController(this.sendNotification);
+    this.notificationValidator = new ValidateNotificationRequest();
+    this.notificationSender = new SendNotification();
+    this.notificationController = new NotificationController(this.notificationSender, this.notificationValidator);
     this.notificationConsumer = new NotificationConsumer(this.notificationController);
   }
 

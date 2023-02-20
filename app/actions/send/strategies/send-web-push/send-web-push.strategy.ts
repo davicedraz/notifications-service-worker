@@ -1,10 +1,14 @@
 ﻿import { Notification } from './../../../../entities/notification/notification.entity';
 import { SenderStrategy } from "../sender.strategy";
 import { SenderProvider } from './../../interfaces/sender.provider.interface';
+import { XptoSenderProvider } from './providers/xpto.provider';
 
 export class SendWebPushStrategy extends SenderStrategy {
 
-  constructor(senderProvider: SenderProvider) {
+  constructor(preferredProvider?: SenderProvider) {
+    const defaultProvider = new XptoSenderProvider();
+    const senderProvider = preferredProvider || defaultProvider;
+    
     super(senderProvider);
   }
 

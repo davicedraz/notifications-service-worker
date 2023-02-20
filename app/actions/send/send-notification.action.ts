@@ -9,8 +9,8 @@ export class SendNotification implements NotificationSender {
 
   execute(notificationRequest: NotificationRequest): NotificationResponse {
     const { title, content, imageURL, channel } = notificationRequest;
-    const notification = new Notification(title, content, imageURL, (<any>NotificationChannel)[channel]);
 
+    const notification = new Notification(title, content, imageURL, channel as NotificationChannel);
     const strategyFactory = new SenderStrategyFactory(notification);
     const senderStrategy = strategyFactory.create();
 

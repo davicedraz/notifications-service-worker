@@ -19,7 +19,18 @@ export class NotificationConsumer {
         channel: "web_push",
         send_after: "2015-09-24 14:00:00 GMT-0300",
       }
-    }];
+    },
+    // {
+    //   data: {
+    //     user_email: "davioler@gmail.com",
+    //     title: "Finalize a compra do seu carrinho",
+    //     content: "Controle multimídia e outros 2 produtos",
+    //     image_url: "https://cdn-icons-png.flaticon.com/512/34/34627.png?w=360",
+    //     channel: "sms",
+    //     send_after: "2015-09-24 14:00:00 GMT-0300",
+    //   }
+    // }
+  ];
 
     newMessages.forEach(async message => {
       const notificationRequest = this.createNotificationRequestfromKafkaMessage(message);
