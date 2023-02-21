@@ -6,14 +6,14 @@ import { NotificationConsumer } from "./ports/kafka/consumer/notification.consum
 require('dotenv').config();
 
 class Application {
-  private readonly notificationValidator: ValidateNotificationRequest;
   private readonly notificationSender: SendNotification;
+  private readonly notificationValidator: ValidateNotificationRequest;
   private readonly notificationController: NotificationController;
   private readonly notificationConsumer: NotificationConsumer;
 
   constructor() {
-    this.notificationValidator = new ValidateNotificationRequest();
     this.notificationSender = new SendNotification();
+    this.notificationValidator = new ValidateNotificationRequest();
     this.notificationController = new NotificationController(this.notificationSender, this.notificationValidator);
     this.notificationConsumer = new NotificationConsumer(this.notificationController);
   }
