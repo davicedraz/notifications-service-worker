@@ -1,0 +1,12 @@
+﻿networks: 
+  default: 
+      name: notifications-net
+      external: true
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: notifications-rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672

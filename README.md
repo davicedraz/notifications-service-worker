@@ -37,3 +37,9 @@ In order to see a test coverage report, run:
 ```bash
  npm run test:coverage
 ```
+
+## Docker
+
+```bash
+docker network create notifications-net
+```

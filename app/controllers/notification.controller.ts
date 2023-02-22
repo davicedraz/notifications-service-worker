@@ -2,8 +2,8 @@
 import { NotificationValidator } from '../actions/validate/notification-validator.interface';
 import { NotificationRequestRespondent } from '../actions/respond/notification-request-respondent.interface';
 import { NotificationSender } from '../actions/send/interfaces/notification-sender.interface';
-import { NotificationRequest } from '../adapters/notification-request';
-import { NotificationResponse } from '../adapters/notification-response';
+import { NotificationRequest } from '../entities/notification/dto/notification-request';
+import { NotificationResponse } from '../entities/notification/dto/notification-response';
 
 export class NotificationController {
   private readonly validateNotification: NotificationValidator;
