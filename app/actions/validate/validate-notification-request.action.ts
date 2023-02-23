@@ -1,4 +1,4 @@
-﻿import { NotificationRequest } from "../../adapters/notification-request";
+﻿import { NotificationRequest } from "../../entities/notification/dto/notification-request";
 import { NotificationValidator } from "./notification-validator.interface";
 
 export class ValidateNotificationRequest implements NotificationValidator {

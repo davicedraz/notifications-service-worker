@@ -20,10 +20,12 @@
     "url": "git+https://github.com/davicedraz/notifications-service-worker.git"
   },
   "dependencies": {
+    "amqplib": "^0.10.3",
     "dotenv": "^16.0.3",
     "web-push": "^3.5.0"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.10.1",
     "@types/node": "^18.14.0",
     "@types/web-push": "^3.3.2",
     "@vitest/coverage-istanbul": "^0.25.8",

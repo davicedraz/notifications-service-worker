@@ -1,6 +1,5 @@
 ﻿import { InvalidNotificationRequestError } from '../errors/invalid-notification-request.error';
 import { NotificationValidator } from '../actions/validate/notification-validator.interface';
-import { NotificationRequestRespondent } from '../actions/respond/notification-request-respondent.interface';
 import { NotificationSender } from '../actions/send/interfaces/notification-sender.interface';
 import { NotificationRequest } from '../entities/notification/dto/notification-request';
 import { NotificationResponse } from '../entities/notification/dto/notification-response';

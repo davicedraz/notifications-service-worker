@@ -1,8 +1,8 @@
-﻿import { KafkaMessage } from './../kafka-message';
+﻿import { RabbitmqMessageDTO } from './../dto/rabbitmq-message.dto';
 import { NotificationRequest } from "../../../entities/notification/dto/notification-request";
 import { NotificationController } from "../../../controllers/notification.controller";
 
-export class NotificationConsumer {
+export class RabbitmqConsumer {
   private readonly notificationController: NotificationController
 
   constructor(notificationController: NotificationController) {
@@ -10,6 +10,22 @@ export class NotificationConsumer {
   }
 
   public consume() {
+
+    // var amqp = require('amqplib/callback_api');
+
+    // amqp.connect('amqp://localhost:5672', function (err, conn) {
+    //   conn.createChannel(function (err, ch) {
+    //     var q = 'hello';
+
+    //     ch.assertQueue(q, { durable: false });
+    //     ch.prefetch(1);
+    //     console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", q);
+    //     ch.consume(q, function (msg) {
+    //       console.log(" [x] Received %s", msg.content.toString());
+    //     }, { noAck: true });
+    //   });
+    // });
+
     const newMessages = [{
       data: {
         user_email: "davioler@gmail.com",
@@ -33,12 +49,12 @@ export class NotificationConsumer {
     ];
 
     newMessages.forEach(async message => {
-      const notificationRequest = this.createNotificationRequestfromKafkaMessage(message);
+      const notificationRequest = this.createNotificationRequestFromKafkaMessage(message);
       await this.notificationController.handle(notificationRequest);
     });
   }
 
-  public createNotificationRequestfromKafkaMessage(message: KafkaMessage): NotificationRequest {
+  public createNotificationRequestFromKafkaMessage(message: RabbitmqMessageDTO): NotificationRequest {
     const title = message.data.title;
     const userEmail = message.data.user_email;
     const content = message.data.content;
