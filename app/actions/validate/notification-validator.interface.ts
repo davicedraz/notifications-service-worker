@@ -1,5 +1,5 @@
-﻿import { NotificationRequest } from '../../entities/notification/dto/notification-request';
+﻿import { NotificationDTO } from './../../entities/notification/dto/notification.dto';
 
 export interface NotificationValidator {
-  execute(notification: NotificationRequest): Boolean
+  execute(notification: NotificationDTO): Boolean
 }

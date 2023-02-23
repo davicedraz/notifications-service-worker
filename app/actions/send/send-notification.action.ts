@@ -1,22 +1,38 @@
-﻿import { SenderStrategyFactory } from './factories/sender-strategy.factory';
-import { NotificationResponse } from '../../entities/notification/dto/notification-response';
+﻿import { NotificationDTO } from './../../entities/notification/dto/notification.dto';
+import { SenderStrategyFactory } from './factories/sender-strategy.factory';
 import { NotificationSender } from './interfaces/notification-sender.interface';
 import { NotificationChannel } from '../../entities/notification/notification-channel';
-import { NotificationRequest } from '../../entities/notification/dto/notification-request';
 import { Notification } from '../../entities/notification/notification.entity';
+import { RabbitmqChannel } from '../../ports/amqp/rabbitmq/rabbitmq.singleton';
 
 export class SendNotification implements NotificationSender {
+  private readonly rabbitmqOpenChannel: RabbitmqChannel;
 
-  execute(notificationRequest: NotificationRequest): NotificationResponse {
-    const { title, content, imageURL, channel } = notificationRequest;
+  constructor() {
+    this.rabbitmqOpenChannel = RabbitmqChannel.getInstance();
+  }
 
-    const notification = new Notification(title, content, imageURL, channel as NotificationChannel);
+  public async execute(notificationRequest: NotificationDTO): Promise<Notification> {
+    const { id, title, content, imageUrl, channel } = notificationRequest;
+    const notification = new Notification(title, content, imageUrl, channel as NotificationChannel);
+
+    const senderProvider = this.getSenderStrategyProvider(notification);
+    const notificationSent = senderProvider.send(notification);
+
+    this.acknowledgeMessage(notificationRequest);
+    console.log(`Message ${id} sended via ${channel}`);
+    
+    return notificationSent;
+  }
+
+  private async acknowledgeMessage(notificationRequest: NotificationDTO) {
+    const amqpChannel = await this.rabbitmqOpenChannel.getChannel();
+    amqpChannel.ack(notificationRequest.originalMessage);
+  }
+
+  private getSenderStrategyProvider(notification: Notification) {
     const strategyFactory = new SenderStrategyFactory(notification);
-    const senderStrategy = strategyFactory.create();
-
-    const notificationSent = senderStrategy.send(notification);
-    const response: NotificationResponse = { status: "ok", result: notificationSent };
-    return response;
+    return strategyFactory.create();
   }
 
 }

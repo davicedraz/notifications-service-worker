@@ -1,6 +1,6 @@
-﻿import { NotificationRequest } from '../../../entities/notification/dto/notification-request';
-import { NotificationResponse } from '../../../entities/notification/dto/notification-response';
+﻿import { NotificationDTO } from '../../../entities/notification/dto/notification.dto';
+import { Notification } from '../../../entities/notification/notification.entity';
 
 export interface NotificationSender {
-  execute(notification: NotificationRequest): NotificationResponse
+  execute(notification: NotificationDTO): Promise<Notification>
 }

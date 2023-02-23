@@ -1,9 +1,9 @@
-﻿import { NotificationRequest } from "../../entities/notification/dto/notification-request";
+﻿import { NotificationDTO } from './../../entities/notification/dto/notification.dto';
 import { NotificationValidator } from "./notification-validator.interface";
 
 export class ValidateNotificationRequest implements NotificationValidator {
 
-  execute(notificationRequest: NotificationRequest): Boolean {
+  execute(notificationRequest: NotificationDTO): Boolean {
     const validations = [
       this.handleNofiticationRequestChannel(notificationRequest.channel)
     ];
