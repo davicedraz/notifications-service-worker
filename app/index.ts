@@ -25,8 +25,8 @@ class Application {
 
   private verifyEnvironment() {
     const requiredEnvs = [
-      'RABBIT_MQ_URI',
-      'RABBIT_MQ_QUEUE',
+      'RABBITMQ_URI',
+      'RABBITMQ_QUEUE',
       'PUBLIC_WEB_PUSH_KEY',
       'PRIVATE_WEB_PUSH_KEY'
     ];

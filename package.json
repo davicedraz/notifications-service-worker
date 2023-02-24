@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "npx ts-node app/index.ts",
+    "start:docker": "sleep 5 && npx ts-node app/index.ts",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
   },

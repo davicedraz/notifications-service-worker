@@ -17,11 +17,11 @@ export class RabbitmqChannel {
 
   public async getChannel(): Promise<amqp.Channel> {
     if (!this.channel) {
-      const uri = process.env.RABBIT_MQ_URI as string;
-      const queue = process.env.RABBIT_MQ_QUEUE as string;
+      const uri = process.env.RABBITMQ_URI as string;
+      const queue = process.env.RABBITMQ_QUEUE as string;
 
       const connection = await this.connect(uri);
-      console.log('Connected on:', process.env.RABBIT_MQ_URI);
+      console.log('Connected on:', process.env.RABBITMQ_URI);
 
       this.channel = await this.createChannel(connection);
       this.channel.assertQueue(queue, { durable: true });

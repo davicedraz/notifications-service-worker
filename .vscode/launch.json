@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "ts-node",
+        "${workspaceFolder}/app/index.ts"
+      ],
+      "protocol": "inspector"
+    }
+  ]
+}

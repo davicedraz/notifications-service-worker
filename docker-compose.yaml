@@ -1,7 +1,9 @@
-﻿networks: 
-  default: 
-      name: notifications-net
-      external: true
+﻿version: '3'
+
+networks:
+  default:
+    name: notifications-net
+    external: true
 
 services:
   rabbitmq:
@@ -10,3 +12,16 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+
+  service-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: notifications-service-worker
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URI: amqp://${RABBITMQ_USERNAME}:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      RABBITMQ_QUEUE: ${RABBITMQ_QUEUE}
+      PUBLIC_WEB_PUSH_KEY: ${PUBLIC_WEB_PUSH_KEY}
+      PRIVATE_WEB_PUSH_KEY: ${PRIVATE_WEB_PUSH_KEY}
