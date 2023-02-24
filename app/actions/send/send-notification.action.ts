@@ -12,7 +12,7 @@ export class SendNotification implements NotificationSender {
     this.rabbitmqOpenChannel = RabbitmqChannel.getInstance();
   }
 
-  public async execute(notificationRequest: NotificationDTO): Promise<Notification> {
+  public async execute(notificationRequest: NotificationDTO) {
     const { id, title, content, imageUrl, channel } = notificationRequest;
     const notification = new Notification(title, content, imageUrl, channel as NotificationChannel);
 
@@ -21,7 +21,7 @@ export class SendNotification implements NotificationSender {
 
     this.acknowledgeMessage(notificationRequest);
     console.log(`Message ${id} sended via ${channel}`);
-    
+
     return notificationSent;
   }
 

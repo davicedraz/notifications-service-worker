@@ -43,3 +43,7 @@ In order to see a test coverage report, run:
 ```bash
 docker network create notifications-net
 ```
+
+```bash
+docker-compose up
+```

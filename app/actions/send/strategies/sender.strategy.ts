@@ -7,7 +7,7 @@ export abstract class SenderStrategy {
     this.senderProvider = senderProvider;
   }
 
-  send(notification: Notification): Notification {
+  send(notification: Notification) {
     throw new Error(`Abstract method call`);
   }
 

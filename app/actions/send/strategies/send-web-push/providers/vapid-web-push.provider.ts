@@ -1,4 +1,5 @@
 ﻿import { SenderProvider } from "../../../interfaces/sender.provider.interface";
+import { Notification } from '../../../../../entities/notification/notification.entity';
 import WebPush from "web-push";
 
 require('dotenv').config();
@@ -14,15 +15,23 @@ export class VAPIDWebPush implements SenderProvider {
     // WebPush.generateVAPIDKeys();
   }
 
-  send() {
-    WebPush.sendNotification(this.userWebPushSubscription, 'Test: web push coming from backend');
+  async send(notification: Notification) {
+    console.log(notification);
+
+    const payload = JSON.stringify({
+      title: notification.title,
+      body: notification.content,
+      image: notification.imageURL
+    });
+
+    await WebPush.sendNotification(this.userWebPushSubscription, payload);
   }
 
   private userWebPushSubscription = {
-    endpoint: "https://fcm.googleapis.com/fcm/send/eMha2sDl-D8:APA91bFAKDaZKCO8s-YY02fKaR4a52SazSIel_nICjG3wB-viunqBqsbLf27Wlg1L39hppQ6r0npKmdaWbxoil-0L4rOxV5HQuQSjZhCVCd2pxgHBKWiXkG0xQNegRBBhQsHpjv4BD0E",
+    endpoint: "https://fcm.googleapis.com/fcm/send/dyXYLtSNMVE:APA91bH7F3OUnZCaFtlXDFo3MD2nnMkYad_ryXy9nLnU8e4izljiZFX1RHHbeHQ5GqZqxC7hPtAlNsC4iwiXGmfrXgvmgyIKlOrcuPSD3uIh6VogaUfhJcZLaOy4CfKspFFTxus85GlV",
     keys: {
-      p256dh: "BH8PSqCcmd99S9vkz0to2DeU8wQCDNI9zdmHlGTlaUGp3dhlb7TX6uI-z1498VVkl8mXl3YSdw_Fy0LLMZ0u2lM",
-      auth: "RXt4fi8nC7kEe2m7DeLo9Q"
+      p256dh: "BFJAWKen0CGhacIdCRS_2Y7gPMPljDhil53XAlB66unOAv0TUf3dJgZp3_SBfUqWIRFMIo3cVBuAuNLKaI8jVb8",
+      auth: "A9HPWGf9sTg84JcEgNemxA"
     }
   }
 }
