@@ -13,8 +13,14 @@ export class SendNotification implements NotificationSender {
   }
 
   public async execute(notificationRequest: NotificationDTO) {
-    const { id, title, content, imageUrl, channel } = notificationRequest;
-    const notification = new Notification(title, content, imageUrl, channel as NotificationChannel);
+    const { id, title, content, imageUrl, channel, recipientUser } = notificationRequest;
+    const notification = new Notification(
+      title,
+      content,
+      imageUrl,
+      channel as NotificationChannel,
+      recipientUser
+    );
 
     const senderProvider = this.getSenderStrategyProvider(notification);
     const notificationSent = senderProvider.send(notification);

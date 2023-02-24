@@ -8,8 +8,10 @@
   sendAfter: Date;
   sentAt: Date;
   originalMessage: any;
+  recipientUser: any;
 
-  constructor({ id = '', title = '', content = '', imageUrl = '', channel = '', userEmail = '', sendAfter = new Date(), sentAt = new Date(), originalMessage,
+  constructor({ id = '', title = '', content = '', imageUrl = '', channel = '', userEmail = '',
+    sendAfter = new Date(), sentAt = new Date(), originalMessage, recipientUser
   }: Partial<NotificationDTO> = {}) {
     this.id = id;
     this.title = title;
@@ -20,6 +22,7 @@
     this.sendAfter = sendAfter;
     this.sentAt = sentAt;
     this.originalMessage = originalMessage;
+    this.recipientUser = recipientUser;
   }
 
   public static fromJSON(json: any): NotificationDTO {

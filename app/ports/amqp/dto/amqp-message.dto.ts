@@ -25,7 +25,8 @@ export class AmqpMessageDTO {
       userEmail: this.data.notification.userEmail,
       sendAfter: this.data.notification.sendAfter,
       sentAt: this.data.notification.sentAt,
-      originalMessage: this.rawMessage
+      originalMessage: this.rawMessage,
+      recipientUser: this.data.user
     });
   }
 
