@@ -34,11 +34,6 @@ docker-compose up
 
 ## Test
 
-*To test typescript files, we need to transpile them during testing. Vitest do that natively, so we don't need to deal with the complexity of transforming source files. Watch mode is enabled by default, aligning itself with the way Vite pushes for a dev first experience. Also, Vitest cares a lot about performance and uses Worker threads to run as much as possible in parallel.*
-
-I found it interesting and it turned out to be really useful and fast.
-
-
 Execute the following command to run all test suites and log mocked results:
 
 ```bash
